@@ -1,0 +1,108 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis.css" type="text/css" />
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.16.1/vis-network.min.js"> </script>
+<center>
+<h1></h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 500px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"id": 25, "label": 25, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": "Max Blau", "label": "Max Blau", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "60s", "label": "60s", "node_color": "green", "shape": "dot", "size": 10}, {"id": 24, "label": 24, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": "Clint Alwahab", "label": "Clint Alwahab", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "70s", "label": "70s", "node_color": "green", "shape": "dot", "size": 10}, {"id": 17, "label": 17, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 11, "label": 11, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 7, "label": 7, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 5, "label": 5, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 3, "label": 3, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 2, "label": 2, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 23, "label": 23, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": "Josh Jackson", "label": "Josh Jackson", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "80s", "label": "80s", "node_color": "green", "shape": "dot", "size": 10}, {"id": 22, "label": 22, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 21, "label": 21, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 19, "label": 19, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 18, "label": 18, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 13, "label": 13, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 12, "label": 12, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 10, "label": 10, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 8, "label": 8, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 20, "label": 20, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 15, "label": 15, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 14, "label": 14, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 1, "label": 1, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": "90s", "label": "90s", "node_color": "green", "shape": "dot", "size": 10}, {"id": 16, "label": 16, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 6, "label": 6, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": 4, "label": 4, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": "Geoffrey Himes", "label": "Geoffrey Himes", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "Paste Staff", "label": "Paste Staff", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "Robert Ham", "label": "Robert Ham", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "Hilary Saunders", "label": "Hilary Saunders", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "00s", "label": "00s", "node_color": "green", "shape": "dot", "size": 10}, {"id": "Wyndham Wyeth", "label": "Wyndham Wyeth", "node_color": "orange", "shape": "dot", "size": 10}, {"id": 9, "label": 9, "node_color": "skyblue", "shape": "dot", "size": 10}, {"id": "Ryan Reed", "label": "Ryan Reed", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "10s", "label": "10s", "node_color": "green", "shape": "dot", "size": 10}, {"id": "M.T. Richards", "label": "M.T. Richards", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "Adrian Spinelli", "label": "Adrian Spinelli", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "Dacey Orr", "label": "Dacey Orr", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "Michael Salfino", "label": "Michael Salfino", "node_color": "orange", "shape": "dot", "size": 10}, {"id": "Bonnie Stiernberg", "label": "Bonnie Stiernberg", "node_color": "orange", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": 25, "to": "Max Blau", "weight": 1}, {"from": 25, "to": "60s", "weight": 1}, {"from": 24, "to": "Clint Alwahab", "weight": 1}, {"from": 24, "to": "70s", "weight": 1}, {"from": "70s", "to": 17, "weight": 1}, {"from": "70s", "to": 11, "weight": 1}, {"from": "70s", "to": 7, "weight": 1}, {"from": "70s", "to": 5, "weight": 1}, {"from": "70s", "to": 3, "weight": 1}, {"from": "70s", "to": 2, "weight": 1}, {"from": 23, "to": "Josh Jackson", "weight": 1}, {"from": 23, "to": "80s", "weight": 1}, {"from": "Josh Jackson", "to": 22, "weight": 1}, {"from": "Josh Jackson", "to": 21, "weight": 1}, {"from": "Josh Jackson", "to": 19, "weight": 1}, {"from": "Josh Jackson", "to": 18, "weight": 1}, {"from": "Josh Jackson", "to": 13, "weight": 1}, {"from": "Josh Jackson", "to": 12, "weight": 1}, {"from": "Josh Jackson", "to": 10, "weight": 1}, {"from": "Josh Jackson", "to": 8, "weight": 1}, {"from": "Josh Jackson", "to": 2, "weight": 1}, {"from": "80s", "to": 20, "weight": 1}, {"from": "80s", "to": 15, "weight": 1}, {"from": "80s", "to": 14, "weight": 1}, {"from": "80s", "to": 8, "weight": 1}, {"from": "80s", "to": 1, "weight": 1}, {"from": 22, "to": "90s", "weight": 1}, {"from": "90s", "to": 21, "weight": 1}, {"from": "90s", "to": 19, "weight": 1}, {"from": "90s", "to": 18, "weight": 1}, {"from": "90s", "to": 16, "weight": 1}, {"from": "90s", "to": 13, "weight": 1}, {"from": "90s", "to": 10, "weight": 1}, {"from": "90s", "to": 6, "weight": 1}, {"from": "90s", "to": 4, "weight": 1}, {"from": 20, "to": "Geoffrey Himes", "weight": 1}, {"from": 17, "to": "Paste Staff", "weight": 1}, {"from": "Paste Staff", "to": 14, "weight": 1}, {"from": 16, "to": "Robert Ham", "weight": 1}, {"from": 15, "to": "Hilary Saunders", "weight": 1}, {"from": 12, "to": "00s", "weight": 1}, {"from": 11, "to": "Wyndham Wyeth", "weight": 1}, {"from": 9, "to": "Ryan Reed", "weight": 1}, {"from": 9, "to": "10s", "weight": 1}, {"from": "Ryan Reed", "to": 5, "weight": 1}, {"from": 7, "to": "M.T. Richards", "weight": 1}, {"from": 6, "to": "Adrian Spinelli", "weight": 1}, {"from": 4, "to": "Dacey Orr", "weight": 1}, {"from": 3, "to": "Michael Salfino", "weight": 1}, {"from": 1, "to": "Bonnie Stiernberg", "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {
+    "configure": {
+        "enabled": false
+    },
+    "edges": {
+        "color": {
+            "inherit": true
+        },
+        "smooth": {
+            "enabled": false,
+            "type": "continuous"
+        }
+    },
+    "interaction": {
+        "dragNodes": true,
+        "hideEdgesOnDrag": false,
+        "hideNodesOnDrag": false
+    },
+    "physics": {
+        "enabled": true,
+        "stabilization": {
+            "enabled": true,
+            "fit": true,
+            "iterations": 1000,
+            "onlyDynamicEdges": false,
+            "updateInterval": 50
+        }
+    }
+};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
